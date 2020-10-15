@@ -33,3 +33,8 @@ class ProfileList(generics.ListAPIView):
     queryset = Profile.objects.filter(is_hr_staff=False)
     serializer_class = ProfileSerializer
     permission_classes = [permissions.IsAuthenticated, IsHrStaff]
+
+
+class ProfileDetail(generics.RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer

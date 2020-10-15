@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from main_app.models import Question, Questionnaire, Profile
+from main_app.models import Question, Questionnaire, Profile, User
 
 
 class QuestionSerializer(serializers.ModelSerializer):
