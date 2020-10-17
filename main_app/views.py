@@ -1,6 +1,8 @@
 from rest_framework import generics, permissions
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
 
-from main_app.models import Question, Questionnaire, Profile
+from main_app.models import Question, Questionnaire, Profile, User
 from main_app.serializers import QuestionSerializer, QuestionnaireSerializer, ProfileSerializer
 from main_app.permissions import IsHrStaff
 
@@ -38,3 +40,15 @@ class ProfileList(generics.ListAPIView):
 class ProfileDetail(generics.RetrieveAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+
+
+@api_view()
+@permission_classes([permissions.IsAuthenticated])
+def current_user_data(request):
+    user = User.objects.get(id=request.user.id)
+    data = {
+        'id': user.id,
+        'username': user.username,
+        'is_hr_staff': user.profile.is_hr_staff,
+    }
+    return Response(data)
