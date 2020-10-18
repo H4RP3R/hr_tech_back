@@ -14,7 +14,7 @@ class QuestionFOurAnswers(models.Model):
     answer4 = models.CharField(max_length=250, blank=False, default='')
     has_correct_answer = models.BooleanField()
     correct_answers = models.CharField(
-        validators=[validate_comma_separated_integer_list], max_length=100)
+        validators=[validate_comma_separated_integer_list], max_length=100, blank=True)
 
     class Meta:
         abstract = True
