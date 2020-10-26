@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from main_app.models import Question, Questionnaire, Profile, User
+from main_app.models import Question, Questionnaire, Profile, User, QuestionStats
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -32,4 +32,10 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         extra_kwargs = {'password': {'write_only': True}}
+        fields = '__all__'
+
+
+class QuestionStatsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuestionStats
         fields = '__all__'
