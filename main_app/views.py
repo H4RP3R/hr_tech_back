@@ -5,9 +5,9 @@ from rest_framework import status
 
 from django.db.models import F
 
-from main_app.models import Question, Questionnaire, Profile, User, QuestionStats
+from main_app.models import Question, Questionnaire, Profile, User, QuestionStats, PollResults
 from main_app.serializers import QuestionSerializer, QuestionnaireSerializer, ProfileSerializer, \
-    QuestionStatsSerializer
+    QuestionStatsSerializer, PollResultsSerializer
 from main_app.permissions import IsHrStaff
 
 
@@ -83,3 +83,15 @@ class QuestionStatsDetail(generics.RetrieveUpdateAPIView):
         question_stats.save()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class PollResultsList(generics.ListCreateAPIView):
+    queryset = PollResults.objects.all()
+    serializer_class = PollResultsSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class PollsResultsDetail(generics.RetrieveAPIView):
+    queryset = PollResults.objects.all()
+    serializer_class = PollResultsSerializer
+    permission_classes = [permissions.IsAuthenticated]

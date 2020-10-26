@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from main_app.models import Question, Questionnaire, Profile, User, QuestionStats
+from main_app.models import Question, Questionnaire, Profile, User, QuestionStats, PollResults
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -38,4 +38,9 @@ class ProfileSerializer(serializers.ModelSerializer):
 class QuestionStatsSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuestionStats
+        fields = '__all__'
+
+class PollResultsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PollResults
         fields = '__all__'

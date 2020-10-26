@@ -53,3 +53,10 @@ class QuestionStats(models.Model):
     var_2_repl = models.PositiveIntegerField(default=0)
     var_3_repl = models.PositiveIntegerField(default=0)
     var_4_repl = models.PositiveIntegerField(default=0)
+
+
+class PollResults(models.Model):
+    user = models.OneToOneField(User, on_delete=models.DO_NOTHING)
+    questionnaire = models.OneToOneField('Questionnaire', on_delete=models.DO_NOTHING)
+    answers = models.JSONField()
+    results = models.JSONField()
