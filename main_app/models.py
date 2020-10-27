@@ -30,7 +30,7 @@ class Question(QuestionFOurAnswers):
 
 class Questionnaire(models.Model):
     title = models.CharField(max_length=250, unique=True)
-    questions = models.ManyToManyField(Question)
+    questions = models.ManyToManyField(Question, blank=True)
 
     def __str__(self):
         return f'Questionnaire id: {self.id} | title: {self.title}'
@@ -55,6 +55,17 @@ class QuestionStats(models.Model):
     var_4_repl = models.PositiveIntegerField(default=0)
 
 
+class QuestionInPollStats(models.Model):
+    poll = models.ForeignKey('Questionnaire', on_delete=models.DO_NOTHING)
+    question = models.ForeignKey('Question', on_delete=models.DO_NOTHING)
+    total_replies = models.PositiveIntegerField(default=0)
+    correct = models.PositiveIntegerField(default=0)
+    var_1_repl = models.PositiveIntegerField(default=0)
+    var_2_repl = models.PositiveIntegerField(default=0)
+    var_3_repl = models.PositiveIntegerField(default=0)
+    var_4_repl = models.PositiveIntegerField(default=0)
+
+
 class PollResults(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     questionnaire = models.ForeignKey(Questionnaire, on_delete=models.DO_NOTHING)
@@ -63,3 +74,8 @@ class PollResults(models.Model):
 
     class Meta:
         unique_together = ('user', 'questionnaire')
+
+
+class TotalPollStats(models.Model):
+    questionnaire = models.ForeignKey(Questionnaire, on_delete=models.DO_NOTHING)
+    total_replies = models.PositiveIntegerField(default=0)

@@ -2,7 +2,7 @@ from django.urls import path
 
 from main_app.views import QuestionList, QuestionDetail, QuestionnaireList, QuestionnaireDetail, \
     ProfileList, ProfileDetail, current_user_data, QuestionStatsList, QuestionStatsDetail, \
-    PollResultsList, PollsResultsDetail
+    PollResultsList, PollsResultsDetail, QuestionInPollStatsList, QuestionInPollStatsDetail
 
 
 urlpatterns = [
@@ -17,4 +17,8 @@ urlpatterns = [
     path('question_stats/<int:pk>', QuestionStatsDetail.as_view(), name='question_stats_detail'),
     path('poll_results/', PollResultsList.as_view(), name='poll_results_list'),
     path('poll_results/<int:pk>', PollsResultsDetail.as_view(), name='poll_results_detail'),
+    path('question_in_poll_stats/', QuestionInPollStatsList.as_view(),
+         name='question_in_poll_stats'),
+    path('question_in_poll_stats/<int:pk>', QuestionInPollStatsDetail.as_view(),
+         name='question_in_poll_detail'),
 ]

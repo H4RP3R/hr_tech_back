@@ -5,9 +5,10 @@ from rest_framework import status
 
 from django.db.models import F
 
-from main_app.models import Question, Questionnaire, Profile, User, QuestionStats, PollResults
+from main_app.models import Question, Questionnaire, Profile, User, QuestionStats, PollResults, \
+    QuestionInPollStats
 from main_app.serializers import QuestionSerializer, QuestionnaireSerializer, ProfileSerializer, \
-    QuestionStatsSerializer, PollResultsSerializer
+    QuestionStatsSerializer, PollResultsSerializer, QuestionInPollStatsSerializer
 from main_app.permissions import IsHrStaff
 
 
@@ -90,8 +91,50 @@ class PollResultsList(generics.ListCreateAPIView):
     serializer_class = PollResultsSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def create(self, request):
+        user = User.objects.get(pk=request.data['user'])
+        questionnaire = Questionnaire.objects.get(pk=request.data['questionnaire'])
+
+        results = PollResults.objects.create(
+            user=user,
+            questionnaire=questionnaire,
+            answers=request.data['answers'],
+            results=request.data['results'])
+        results.save()
+
+        serializer = PollResultsSerializer(results)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 class PollsResultsDetail(generics.RetrieveAPIView):
     queryset = PollResults.objects.all()
     serializer_class = PollResultsSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class QuestionInPollStatsList(generics.ListAPIView):
+    queryset = QuestionInPollStats.objects.all()
+    serializer_class = QuestionInPollStatsSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class QuestionInPollStatsDetail(generics.RetrieveUpdateAPIView):
+    queryset = QuestionInPollStats.objects.all()
+    serializer_class = QuestionInPollStatsSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def update(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = QuestionInPollStatsSerializer(queryset, many=True)
+        question_stats, _ = QuestionInPollStats.objects.get_or_create(
+            question=Question.objects.get(pk=request.data['question']),
+            poll=Questionnaire.objects.get(pk=request.data['poll']))
+        question_stats.total_replies = F('total_replies') + 1
+        question_stats.correct = F('correct') + request.data['correct']
+        question_stats.var_1_repl = F('var_1_repl') + request.data['var_1_repl']
+        question_stats.var_2_repl = F('var_2_repl') + request.data['var_2_repl']
+        question_stats.var_3_repl = F('var_3_repl') + request.data['var_3_repl']
+        question_stats.var_4_repl = F('var_4_repl') + request.data['var_4_repl']
+        question_stats.save()
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
