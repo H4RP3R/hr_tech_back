@@ -14,7 +14,7 @@ from main_app.permissions import IsHrStaff
 class QuestionList(generics.ListCreateAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
-    permission_classes = [permissions.IsAuthenticated, IsHrStaff]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -26,13 +26,13 @@ class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
 class QuestionnaireList(generics.ListCreateAPIView):
     queryset = Questionnaire.objects.all()
     serializer_class = QuestionnaireSerializer
-    permission_classes = [permissions.IsAuthenticated, IsHrStaff]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class QuestionnaireDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Questionnaire.objects.all()
     serializer_class = QuestionnaireSerializer
-    permission_classes = [permissions.IsAuthenticated, IsHrStaff]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class ProfileList(generics.ListAPIView):

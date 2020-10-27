@@ -30,7 +30,7 @@ class Question(QuestionFOurAnswers):
 
 class Questionnaire(models.Model):
     title = models.CharField(max_length=250, unique=True)
-    questions = models.ManyToManyField(Question, blank=True)
+    questions = models.ManyToManyField(Question)
 
     def __str__(self):
         return f'Questionnaire id: {self.id} | title: {self.title}'
@@ -56,7 +56,10 @@ class QuestionStats(models.Model):
 
 
 class PollResults(models.Model):
-    user = models.OneToOneField(User, on_delete=models.DO_NOTHING)
-    questionnaire = models.OneToOneField('Questionnaire', on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    questionnaire = models.ForeignKey(Questionnaire, on_delete=models.DO_NOTHING)
     answers = models.JSONField()
     results = models.JSONField()
+
+    class Meta:
+        unique_together = ('user', 'questionnaire')

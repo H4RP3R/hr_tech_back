@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+    <object model="main_app.question" pk="1">
+        <field name="answer1" type="CharField">Benjamin Sisko</field>
+        <field name="answer2" type="CharField">Kathryn Janewa</field>
+        <field name="answer3" type="CharField">Jean-Luc Picard</field>
+        <field name="answer4" type="CharField">Jonathan Archer</field>
+        <field name="has_correct_answer" type="BooleanField">True</field>
+        <field name="correct_answers" type="CharField">3</field>
+        <field name="text" type="TextField">&lt;h2&gt;Which &lt;i&gt;Star Trek&lt;/i&gt; captain has an artificial heart?&lt;/h2&gt;</field>
+        <field name="score" type="IntegerField">10</field>
+    </object>
+    <object model="main_app.question" pk="2">
+        <field name="answer1" type="CharField">Sarek</field>
+        <field name="answer2" type="CharField">Spock</field>
+        <field name="answer3" type="CharField">T'Pol</field>
+        <field name="answer4" type="CharField">Tuvok</field>
+        <field name="has_correct_answer" type="BooleanField">True</field>
+        <field name="correct_answers" type="CharField">3</field>
+        <field name="text" type="TextField">&lt;h2&gt;&lt;strong&gt;Who was the first Vulcan science officer aboard the starship &lt;/strong&gt;&lt;i&gt;&lt;strong&gt;Enterprise?&lt;/strong&gt;&lt;/i&gt;&lt;/h2&gt;</field>
+        <field name="score" type="IntegerField">10</field>
+    </object>
+    <object model="main_app.question" pk="3">
+        <field name="answer1" type="CharField">Vulcans</field>
+        <field name="answer2" type="CharField">Humans</field>
+        <field name="answer3" type="CharField">Borg</field>
+        <field name="answer4" type="CharField">Klingons</field>
+        <field name="has_correct_answer" type="BooleanField">True</field>
+        <field name="correct_answers" type="CharField">1</field>
+        <field name="text" type="TextField">&lt;h2&gt;&lt;strong&gt;Which species was the first to discover warp drive?&lt;/strong&gt;&lt;/h2&gt;</field>
+        <field name="score" type="IntegerField">10</field>
+    </object>
+    <object model="main_app.question" pk="4">
+        <field name="answer1" type="CharField">Hoshi</field>
+        <field name="answer2" type="CharField">T'Pol</field>
+        <field name="answer3" type="CharField">Phlox</field>
+        <field name="answer4" type="CharField">Trip</field>
+        <field name="has_correct_answer" type="BooleanField">False</field>
+        <field name="correct_answers" type="CharField">4</field>
+        <field name="text" type="TextField">&lt;h2&gt;&lt;strong&gt;What character dies in the series finale of &lt;/strong&gt;&lt;i&gt;&lt;strong&gt;Star Trek: Enterprise?&lt;/strong&gt;&lt;/i&gt;&lt;/h2&gt;</field>
+        <field name="score" type="IntegerField">10</field>
+    </object>
+    <object model="main_app.question" pk="5">
+        <field name="answer1" type="CharField">Plasma</field>
+        <field name="answer2" type="CharField">Antimatter</field>
+        <field name="answer3" type="CharField">zero-point energy</field>
+        <field name="answer4" type="CharField">particle-beam</field>
+        <field name="has_correct_answer" type="BooleanField">False</field>
+        <field name="correct_answers" type="CharField">4</field>
+        <field name="text" type="TextField">&lt;h2&gt;&lt;strong&gt;What type of weapons technology does a phaser use?&lt;/strong&gt;&lt;/h2&gt;</field>
+        <field name="score" type="IntegerField">10</field>
+    </object>
+</django-objects>
