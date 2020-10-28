@@ -8,8 +8,14 @@ from django.db.models import F
 from main_app.models import Question, Questionnaire, Profile, User, QuestionStats, PollResults, \
     QuestionInPollStats
 from main_app.serializers import QuestionSerializer, QuestionnaireSerializer, ProfileSerializer, \
-    QuestionStatsSerializer, PollResultsSerializer, QuestionInPollStatsSerializer
+    QuestionStatsSerializer, PollResultsSerializer, QuestionInPollStatsSerializer, UserSerializer
 from main_app.permissions import IsHrStaff
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsHrStaff]
 
 
 class QuestionList(generics.ListCreateAPIView):
@@ -138,3 +144,13 @@ class QuestionInPollStatsDetail(generics.RetrieveUpdateAPIView):
         question_stats.save()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view()
+@permission_classes([permissions.IsAuthenticated])
+def pollResultsListByUserId(request, pk):
+    user = User.objects.get(pk=pk)
+    queryset = PollResults.objects.filter(user=user)
+    serializer = PollResultsSerializer(queryset, many=True)
+
+    return Response(serializer.data, status=status.HTTP_200_OK)

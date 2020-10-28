@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<django-objects version="1.0"><object model="main_app.questionnaire" pk="1"><field name="title" type="CharField">Star Treck</field><field name="questions" rel="ManyToManyRel" to="main_app.question"><object pk="1"></object><object pk="2"></object><object pk="3"></object></field></object></django-objects>
+<django-objects version="1.0">
+    <object model="main_app.questionnaire" pk="1">
+        <field name="title" type="CharField">Star Trek</field>
+        <field name="questions" rel="ManyToManyRel" to="main_app.question">
+            <object pk="1"></object>
+            <object pk="2"></object>
+            <object pk="3"></object>
+        </field>
+    </object>
+</django-objects>

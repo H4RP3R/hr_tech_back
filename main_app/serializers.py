@@ -3,12 +3,6 @@ from main_app.models import Question, Questionnaire, Profile, User, QuestionStat
     QuestionInPollStats
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'username']
-
-
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
@@ -42,6 +36,14 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class UserSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'profile']
+
+
 class QuestionStatsSerializer(serializers.ModelSerializer):
     question = QuestionSerializer(read_only=True)
 
@@ -56,7 +58,7 @@ class PollResultsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PollResults
-        fields = ['questionnaire', 'user']
+        fields = '__all__'
 
 
 class QuestionInPollStatsSerializer(serializers.ModelSerializer):
