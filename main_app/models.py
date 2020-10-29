@@ -71,6 +71,7 @@ class PollResults(models.Model):
     questionnaire = models.ForeignKey(Questionnaire, on_delete=models.DO_NOTHING)
     answers = models.JSONField()
     results = models.JSONField()
+    score = models.IntegerField(default=0)
 
     class Meta:
         unique_together = ('user', 'questionnaire')

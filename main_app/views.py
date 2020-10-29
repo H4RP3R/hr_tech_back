@@ -105,7 +105,8 @@ class PollResultsList(generics.ListCreateAPIView):
             user=user,
             questionnaire=questionnaire,
             answers=request.data['answers'],
-            results=request.data['results'])
+            results=request.data['results'],
+            score=request.data['score'])
         results.save()
 
         serializer = PollResultsSerializer(results)
