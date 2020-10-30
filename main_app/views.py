@@ -132,7 +132,7 @@ class QuestionInPollStatsDetail(generics.RetrieveUpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        serializer = QuestionInPollStatsSerializer(queryset, many=True)
+        serializer = QuestionInPollStatsSerializer(queryset)
         question_stats, _ = QuestionInPollStats.objects.get_or_create(
             question=Question.objects.get(pk=request.data['question']),
             poll=Questionnaire.objects.get(pk=request.data['poll']))
