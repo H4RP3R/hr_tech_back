@@ -38,8 +38,8 @@ class Questionnaire(models.Model):
 
     def __str__(self):
         dt = self.pub_date.strftime('%b %d %Y %H:%M:%S')
-        return f'Questionnaire id: {self.id} | title: {self.title} | pub_date: {dt}'
-
+        # return f'Questionnaire id: {self.id} | title: {self.title} | pub_date: {dt}'
+        return self.questions
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.DO_NOTHING)

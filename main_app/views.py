@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 
-from django.db.models import F
+from django.db.models import F, Q
 
 from main_app.models import Question, Questionnaire, Profile, User, QuestionStats, PollResults, \
     QuestionInPollStats
@@ -45,7 +45,7 @@ class QuestionnaireDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class PublishedQuestionnaireList(generics.ListAPIView):
-    queryset = Questionnaire.objects.filter(pub_date__lte=datetime.now())
+    queryset = Questionnaire.objects.filter(Q(pub_date__lte=datetime.now()) & ~Q(questions=None))
     serializer_class = QuestionnaireSerializer
     permission_classes = [permissions.IsAuthenticated]
 
