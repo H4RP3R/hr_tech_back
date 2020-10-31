@@ -12,7 +12,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 class QuestionnaireSerializer(serializers.ModelSerializer):
     class Meta:
         model = Questionnaire
-        fields = ['id', 'title', 'questions']
+        fields = ['id', 'title', 'questions', 'pub_date']
 
     def to_representation(self, instance):
         questions = [QuestionSerializer(q).data for q in instance.questions.all()]
@@ -20,11 +20,13 @@ class QuestionnaireSerializer(serializers.ModelSerializer):
             'id': instance.id,
             'title': instance.title,
             'questions': questions,
+            'pub_date': instance.pub_date
         }
 
     def update(self, instance, validated_data):
         instance.title = validated_data.get('title', instance.title)
         instance.questions.set(validated_data.get('questions', instance.questions))
+        instance.pub_date = validated_data.get('pub_date', instance.pub_date)
         instance.save()
         return instance
 

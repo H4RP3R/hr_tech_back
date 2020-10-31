@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.core.validators import validate_comma_separated_integer_list
 from django.contrib.auth.models import User
@@ -32,9 +34,11 @@ class Question(QuestionFOurAnswers):
 class Questionnaire(models.Model):
     title = models.CharField(max_length=250, unique=True)
     questions = models.ManyToManyField(Question, blank=True)
+    pub_date = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
-        return f'Questionnaire id: {self.id} | title: {self.title}'
+        dt = self.pub_date.strftime('%b %d %Y %H:%M:%S')
+        return f'Questionnaire id: {self.id} | title: {self.title} | pub_date: {dt}'
 
 
 class Profile(models.Model):

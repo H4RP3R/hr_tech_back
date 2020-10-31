@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from rest_framework import generics, permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -38,6 +40,12 @@ class QuestionnaireList(generics.ListCreateAPIView):
 
 class QuestionnaireDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Questionnaire.objects.all()
+    serializer_class = QuestionnaireSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class PublishedQuestionnaireList(generics.ListAPIView):
+    queryset = Questionnaire.objects.filter(pub_date__lte=datetime.now())
     serializer_class = QuestionnaireSerializer
     permission_classes = [permissions.IsAuthenticated]
 

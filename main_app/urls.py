@@ -3,7 +3,7 @@ from django.urls import path
 from main_app.views import QuestionList, QuestionDetail, QuestionnaireList, QuestionnaireDetail, \
     ProfileList, ProfileDetail, current_user_data, QuestionStatsList, QuestionStatsDetail, \
     PollResultsList, PollsResultsDetail, QuestionInPollStatsList, QuestionInPollStatsDetail, \
-    UserList, pollResultsListByUserId
+    UserList, pollResultsListByUserId, PublishedQuestionnaireList
 
 urlpatterns = [
     path('questions/', QuestionList.as_view(), name='question_list'),
@@ -11,6 +11,8 @@ urlpatterns = [
 
     path('questionnaire/', QuestionnaireList.as_view(), name='questionnaire_list'),
     path('questionnaire/<int:pk>', QuestionnaireDetail.as_view(), name='questionnaire_detail'),
+    path('published_questionnaire/',
+         PublishedQuestionnaireList.as_view(), name='published_questionnaire'),
 
     path('profiles/', ProfileList.as_view(), name='profile_list'),
     path('profiles/<int:pk>/', ProfileDetail.as_view(), name='profile_detail'),
