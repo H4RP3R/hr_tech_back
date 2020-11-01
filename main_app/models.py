@@ -1,4 +1,4 @@
-from datetime import datetime
+from django.utils import timezone
 
 from django.db import models
 from django.core.validators import validate_comma_separated_integer_list
@@ -34,12 +34,11 @@ class Question(QuestionFOurAnswers):
 class Questionnaire(models.Model):
     title = models.CharField(max_length=250, unique=True)
     questions = models.ManyToManyField(Question, blank=True)
-    pub_date = models.DateTimeField(default=datetime.now)
+    pub_date = models.DateTimeField()
 
     def __str__(self):
         dt = self.pub_date.strftime('%b %d %Y %H:%M:%S')
-        # return f'Questionnaire id: {self.id} | title: {self.title} | pub_date: {dt}'
-        return self.questions
+        return f'Questionnaire id: {self.id} | title: {self.title} | pub_date: {dt}'
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.DO_NOTHING)
