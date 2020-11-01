@@ -23,9 +23,9 @@
 ## Технологии.
 
 ### Back
-1 Django
-2 Django REST framework
-3 PostgreSQL
+1. Django
+2. Django REST framework
+3. PostgreSQL
 
 ### Front ([тут](https://github.com/H4RP3R/hr_tech_front))
 1 Vue.js
