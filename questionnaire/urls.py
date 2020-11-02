@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', views.obtain_auth_token),
-    path('', include('main_app.urls')),
+    path('api/', include('main_app.urls')),
 ]
 
 if settings.DEBUG:

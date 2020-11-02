@@ -50,7 +50,7 @@ class Profile(models.Model):
 
 
 class QuestionStats(models.Model):
-    question = models.OneToOneField('Question', primary_key=True, on_delete=models.DO_NOTHING)
+    question = models.OneToOneField('Question', primary_key=True, on_delete=models.CASCADE)
     total_replies = models.PositiveIntegerField(default=0)
     correct = models.PositiveIntegerField(default=0)
     var_1_repl = models.PositiveIntegerField(default=0)
@@ -60,8 +60,8 @@ class QuestionStats(models.Model):
 
 
 class QuestionInPollStats(models.Model):
-    poll = models.ForeignKey('Questionnaire', on_delete=models.DO_NOTHING)
-    question = models.ForeignKey('Question', on_delete=models.DO_NOTHING)
+    poll = models.ForeignKey('Questionnaire', on_delete=models.CASCADE)
+    question = models.ForeignKey('Question', on_delete=models.CASCADE)
     total_replies = models.PositiveIntegerField(default=0)
     correct = models.PositiveIntegerField(default=0)
     var_1_repl = models.PositiveIntegerField(default=0)
@@ -71,8 +71,8 @@ class QuestionInPollStats(models.Model):
 
 
 class PollResults(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    questionnaire = models.ForeignKey(Questionnaire, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE)
     answers = models.JSONField()
     results = models.JSONField()
     score = models.IntegerField(default=0)
