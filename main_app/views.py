@@ -45,7 +45,7 @@ class QuestionnaireDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class PublishedQuestionnaireList(generics.ListAPIView):
-    queryset = Questionnaire.objects.filter(Q(pub_date__lte=datetime.now()) & ~Q(questions=None))
+    queryset = Questionnaire.objects.filter(Q(pub_date__lte=datetime.utcnow()) & ~Q(questions=None))
     serializer_class = QuestionnaireSerializer
     permission_classes = [permissions.IsAuthenticated]
 
